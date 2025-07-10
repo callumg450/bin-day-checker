@@ -59,8 +59,16 @@ async function getBinDay(postcode) {
       // Convert DD/MM/YYYY to YYYY-MM-DD for JS Date
       const [day, month, year] = data.date.split('/');
       const isoDate = `${year}-${month}-${day}`;
-      await prisma.binDay.create({
-        data: {
+      await prisma.binDay.upsert({
+        where: {
+          postcode_date_binType: {
+            postcode,
+            date: new Date(isoDate),
+            binType: data.binType
+          }
+        },
+        update: {},
+        create: {
           postcode,
           date: new Date(isoDate),
           binType: data.binType

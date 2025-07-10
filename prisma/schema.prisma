@@ -16,4 +16,6 @@ model BinDay {
   date      DateTime
   binType   String
   createdAt DateTime @default(now())
+
+  @@unique([postcode, date, binType])
 }
