@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 3000;
 
 // GET /api/next-bin-day?postcode=DA11 9AA
