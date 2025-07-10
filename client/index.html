@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Bin Collection Day</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    .container { max-width: 400px; margin: auto; padding: 2em; border: 1px solid #ccc; border-radius: 8px; }
+    h1 { font-size: 1.5em; }
+    #result { margin-top: 1em; font-size: 1.2em; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Next Bin Collection Day</h1>
+    <div id="result">Loading...</div>
+  </div>
+  <script>
+    async function fetchNextBinDay() {
+      // Replace with your actual API endpoint
+      const postcode = 'DA11 9AA';
+      const response = await fetch(`/api/next-bin-day?postcode=${encodeURIComponent(postcode)}`);
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.date && data.binType) {
+          document.getElementById('result').textContent = `Type: ${data.binType}, Date: ${new Date(data.date).toLocaleDateString()}`;
+        } else {
+          document.getElementById('result').textContent = 'No upcoming bin days found.';
+        }
+      } else {
+        document.getElementById('result').textContent = 'Error fetching bin day.';
+      }
+    }
+    fetchNextBinDay();
+  </script>
+</body>
+</html>

@@ -45,16 +45,12 @@ async function getBinDay(postcode) {
       });
   });
 
-  console.log(`Bin collection day for ${postcode}`);
-  binData.forEach(data => {
-    console.log(`Type: ${data.binType}, Date: ${data.date}`);
-  });
-  console.log(binData);
   await browser.close();
 
   // Store results in the database
   console.log(`Storing results in the database for postcode: ${postcode}`);
   for (const data of binData) {
+    console.log(`Type: ${data.binType}, Date: ${data.date}`);
     if (data.date && data.binType) {
       // Convert DD/MM/YYYY to YYYY-MM-DD for JS Date
       const [day, month, year] = data.date.split('/');
@@ -76,6 +72,7 @@ async function getBinDay(postcode) {
       });
     }
   }
+  console.log(`Bin collection day for ${postcode}`);
 
   await prisma.$disconnect();
 }
