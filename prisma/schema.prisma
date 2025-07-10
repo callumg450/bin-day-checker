@@ -1,0 +1,19 @@
+// Prisma schema for storing bin day results
+// Save this as prisma/schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model BinDay {
+  id        Int      @id @default(autoincrement())
+  postcode  String
+  date      DateTime
+  binType   String
+  createdAt DateTime @default(now())
+}

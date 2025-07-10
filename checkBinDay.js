@@ -1,10 +1,11 @@
 const { chromium } = require('playwright');
 
 async function getBinDay(postcode) {
-  const browser = await chromium.launch({
-  headless: false,
-  slowMo: 200 // ms delay between actions
-});
+  const browser = await chromium.launch();
+//   const browser = await chromium.launch({
+//   headless: false,
+//   slowMo: 200 // ms delay between actions
+// });
   const page = await browser.newPage();
 
   // 1. Navigate to your local council's bin lookup page
