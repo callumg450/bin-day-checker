@@ -4,7 +4,8 @@ const prisma = new PrismaClient();
 
 async function getBinDay(postcode) {
   console.log(`Checking bin collection day for postcode: ${postcode}`);
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ headless: false, slowMo: 200 }); // Set headless to true for production
+  // const browser = await
   const page = await browser.newPage();
 
   // 1. Navigate to your local council's bin lookup page
